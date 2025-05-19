@@ -8,7 +8,7 @@ createApp({
       variants: [
         { name: 'Mooncloth', duration: 4 * 24 * 60 * 60 * 1000 }, // 4 days
         { name: 'Cured Rugged Hide', duration: 3 * 24 * 60 * 60 * 1000 }, // 3 days
-        { name: 'Arcanite Bar', duration: 3 * 24 * 60 * 60 * 1000 }, // 3 days
+        { name: 'Arcanite Bar', duration: 2 * 24 * 60 * 60 * 1000 }, // 3 days
         // Add variants with days: e.g. duration: days * 24*60*60*1000
       ],
       selectedVariant: null,
