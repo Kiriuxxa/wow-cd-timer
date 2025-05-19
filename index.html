@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lightweight Timer App</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    form select, form button {
+      padding: 0.5rem;
+    }
+    form select {
+      flex: 1;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid #ddd;
+    }
+    li.finished {
+      color: #888;
+      text-decoration: line-through;
+    }
+    li button {
+      padding: 0.3rem 0.6rem;
+    }
+    li button.delete {
+      margin-left: 0.5rem;
+      background: transparent;
+      color: red;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>⏱️ Wow CD Timers</h1>
+    <form @submit.prevent="addTimer">
+        <input input v-model="charName" placeholder="Enter Char Name"
+            type="text"
+            id="charName"
+            name="charName"
+            required
+            minlength="3"
+            maxlength="20"
+            size="10" />
+      <select v-model="selectedVariant" required>
+        <option disabled value="">Select a timer</option>
+        <option v-for="v in variants" :value="v">
+          {{ v.name }} ({{ formatRemaining(v.duration) }})
+        </option>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+    <ul>
+      <li v-for="timer in timers" :key="timer.id" :class="{ finished: timer.isFinished }">
+        
+        <span>{{ timer.charName }}</span>
+        <span>{{ timer.name }}</span>
+        
+        <span>{{ formatRemaining(timer.remaining) }}</span>
+        <button @click="toggleTimer(timer)">
+          {{ timer.isRunning ? 'Pause' : (timer.isFinished ? 'Restart' : 'Start') }}
+        </button>
+        <button class="delete" @click="removeTimer(timer)">✕</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- App logic -->
+  <script src="app.js"></script>
+</body>
+</html>
